@@ -1,6 +1,7 @@
 package com.example.artecles.data.api
 
 import com.example.artecles.BuildConfig
+import com.example.artecles.costants.KEY
 import com.example.artecles.costants.PATH_MOST_VIEWED
 import com.example.artecles.costants.PATH_SECTIONS
 import com.example.artecles.data.models.network.ArticlesResponse
@@ -16,6 +17,6 @@ interface ArticlesAPI {
     @GET("${BuildConfig.BASE_URL}/$PATH_MOST_VIEWED/$PATH_SECTIONS/{period}")
     suspend fun getArticles(
         @Path("period") period: Int,
-        @Query("api-key") apiKey: String
+        @Query("api-key") apiKey: String = KEY
     ): Response<ArticlesResponse>
 }
