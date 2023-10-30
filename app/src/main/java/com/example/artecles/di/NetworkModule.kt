@@ -1,8 +1,10 @@
 package com.example.artecles.di
 
+import com.example.artecles.BuildConfig
+import com.example.artecles.data.api.ArticlesAPI
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.internal.GsonBuildConfig
+import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
@@ -13,6 +15,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
+@Module
 object NetworkModule {
 
     @Provides
@@ -32,7 +35,7 @@ object NetworkModule {
     ) : Retrofit{
         return Retrofit.Builder().baseUrl(BuildConfig.BASE_URL)
             .addConverterFactory(gsonConverterFactory)
-            .client(OkHttpClient)
+            .client(okHttpClient)
             .build()
     }
 
@@ -57,5 +60,10 @@ object NetworkModule {
             .addInterceptor(logger)
             .build()
     }
+
+    @Provides
+    @Singleton
+    fun provideArticlesAPI(retrofit: Retrofit): ArticlesAPI =
+        retrofit.create(ArticlesAPI::class.java)
 
 }
