@@ -10,7 +10,7 @@ data class Result(
     val url: String = ""
 )
 
-fun ResultApi.toResulApi() =
+fun ResultApi.toResult() =
     Result(
         id = id ?: -1,
         media = media?.map { it.toMedia() } ?: listOf(),

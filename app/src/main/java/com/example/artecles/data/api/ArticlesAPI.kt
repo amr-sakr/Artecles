@@ -14,7 +14,7 @@ interface ArticlesAPI {
 
 //    https://api.nytimes.com/svc/mostpopular/v2/mostviewed/all-sections/1.json?api-key=d4q1Mr1Or4Am6rhoHuvtpkqE2gDp211P
 
-    @GET("${BuildConfig.BASE_URL}/$PATH_MOST_VIEWED/$PATH_SECTIONS/{period}")
+    @GET("${BuildConfig.BASE_URL}/$PATH_MOST_VIEWED/$PATH_SECTIONS/{period}.json")
     suspend fun getArticles(
         @Path("period") period: Int,
         @Query("api-key") apiKey: String = KEY
